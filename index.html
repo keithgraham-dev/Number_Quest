@@ -13,8 +13,24 @@
     <p class="eyebrow">A number guessing game</p>
     <h1>Number Quest</h1>
     <p class="introduction">
-      A secret number is waiting between 1 and 100. Can you find it?
+      Choose a difficulty, then find the secret number before your attempts run out.
     </p>
+
+    <div class="difficulty-control">
+      <label for="difficulty-select">Difficulty</label>
+      <select id="difficulty-select" name="difficulty" aria-describedby="difficulty-help">
+        <option value="easy">Easy (1–50, 10 attempts)</option>
+        <option value="medium">Medium (1–100, 7 attempts)</option>
+        <option value="hard">Hard (1–500, 8 attempts)</option>
+      </select>
+      <p id="difficulty-help" class="field-help">Changing difficulty starts a new round.</p>
+    </div>
+
+    <div class="game-status" aria-live="polite">
+      <p id="current-difficulty">Difficulty: Easy</p>
+      <p id="attempts">Attempts: 0 / 10</p>
+      <p id="remaining-attempts">Remaining attempts: 10</p>
+    </div>
 
     <form id="guess-form" novalidate>
       <label for="guess-input">Your guess</label>
@@ -24,9 +40,9 @@
           name="guess"
           type="number"
           min="1"
-          max="100"
+          max="50"
           step="1"
-          placeholder="Enter 1–100"
+          placeholder="Enter 1–50"
           inputmode="numeric"
           autocomplete="off"
           aria-describedby="feedback"
@@ -40,9 +56,8 @@
     </p>
 
     <div class="game-footer">
-      <p id="attempts" class="attempts" aria-live="polite">Attempts: 0</p>
       <button id="restart-button" class="button button-secondary" type="button">
-        Restart
+        Restart round
       </button>
     </div>
   </main>

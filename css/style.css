@@ -56,7 +56,7 @@ h1 {
 }
 
 .introduction {
-  margin: 16px 0 32px;
+  margin: 16px 0 24px;
   color: var(--color-muted);
   font-size: 1rem;
   line-height: 1.6;
@@ -67,6 +67,54 @@ label {
   margin-bottom: 10px;
   font-size: 0.9rem;
   font-weight: 600;
+}
+
+.difficulty-control {
+  margin-bottom: 22px;
+}
+
+select {
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 40px 12px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  outline: none;
+  background: #0d1325;
+  color: #f3f5ff;
+  font: inherit;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+select:focus-visible {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(101, 240, 207, 0.16);
+}
+
+.field-help {
+  margin: 8px 0 0;
+  color: var(--color-muted);
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+.game-status {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.game-status p {
+  margin: 0;
+  padding: 10px 8px;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  background: #10172a;
+  color: #dce2f7;
+  font-size: 0.78rem;
+  line-height: 1.4;
+  text-align: center;
 }
 
 .guess-controls {
@@ -150,12 +198,6 @@ input:focus-visible {
   border-top: 1px solid var(--color-border);
 }
 
-.attempts {
-  margin: 0;
-  color: var(--color-muted);
-  font-size: 0.9rem;
-}
-
 .button-secondary {
   border-color: #3b4664;
   background: transparent;
@@ -170,6 +212,10 @@ input:focus-visible {
 @media (max-width: 420px) {
   body {
     padding: 16px;
+  }
+
+  .game-status {
+    grid-template-columns: 1fr;
   }
 
   .guess-controls {

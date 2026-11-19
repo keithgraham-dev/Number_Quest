@@ -8,11 +8,18 @@ Open `index.html` in a modern web browser. No installation or build step is need
 
 ## How to play
 
-Enter a whole number from 1 to 100 and select **Guess**. The game tells you whether
-your guess is too high or too low. A correct guess ends the round. Select **Restart**
-to play again with a new secret number.
+Choose a difficulty and enter a whole number within its range. The game tells you
+whether your guess is too high or too low. A correct guess wins the round. Wrong
+guesses use an attempt; using all available attempts reveals the secret number.
 
-Only valid guesses in the 1–100 range count toward the attempts total.
+| Difficulty | Number range | Maximum attempts |
+| --- | --- | --- |
+| Easy | 1–50 | 10 |
+| Medium | 1–100 | 7 |
+| Hard | 1–500 | 8 |
+
+Only valid guesses count. Changing the difficulty starts a new round, and
+**Restart round** starts a new round at the currently selected difficulty.
 
 ## Project files
 
