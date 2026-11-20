@@ -20,6 +20,9 @@ guesses use an attempt; using all available attempts reveals the secret number.
 
 Only valid guesses count. Changing the difficulty starts a new round, and
 **Restart round** starts a new round at the currently selected difficulty.
+Completed rounds show a result panel with the secret number, attempts used, and
+score details. The **New Session** control asks for confirmation before resetting
+the cumulative session score.
 
 ## Scoring
 

@@ -19,7 +19,7 @@
 }
 
 body {
-  min-width: 320px;
+  min-width: 0;
   min-height: 100vh;
   margin: 0;
   display: grid;
@@ -187,6 +187,114 @@ input:focus-visible {
   background: #10172a;
   color: #dce2f7;
   line-height: 1.4;
+  transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease;
+}
+
+.feedback--low {
+  border-color: #347e9a;
+  background: #10232f;
+  color: #9ee8ff;
+}
+
+.feedback--high {
+  border-color: #9b7132;
+  background: #2a2115;
+  color: #ffd48a;
+}
+
+.feedback--invalid {
+  border-color: #8b6044;
+  background: #261d1a;
+  color: #f0c2a0;
+}
+
+.result-panel {
+  margin: 22px 0;
+  padding: 24px;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background: #10172a;
+  text-align: center;
+  animation: result-enter 320ms ease-out both;
+}
+
+.result-panel[hidden] {
+  display: none;
+}
+
+.result-panel--victory {
+  border-color: #3b9b81;
+  background: linear-gradient(145deg, #102c29, #101b2a 76%);
+  box-shadow: 0 12px 36px rgba(49, 171, 133, 0.12);
+  color: #a4f3d9;
+}
+
+.result-panel--defeat {
+  border-color: #925b68;
+  background: linear-gradient(145deg, #2c1b27, #171a2a 76%);
+  box-shadow: 0 12px 36px rgba(177, 82, 102, 0.1);
+  color: #efb4bd;
+  animation-name: defeat-enter;
+}
+
+.result-icon {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 12px;
+  place-items: center;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  font-weight: 700;
+  animation: result-icon-enter 420ms ease-out both;
+}
+
+.result-heading {
+  margin: 0;
+  font-size: 1.7rem;
+  letter-spacing: -0.03em;
+}
+
+.result-heading:focus {
+  outline: 2px solid currentColor;
+  outline-offset: 5px;
+}
+
+.result-panel p {
+  margin: 12px 0 0;
+  color: #e2e7f5;
+  line-height: 1.5;
+}
+
+.result-panel .result-detail {
+  color: #c2cadd;
+  font-size: 0.9rem;
+}
+
+.result-panel .result-round-score {
+  margin-top: 18px;
+  color: inherit;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.result-panel .result-score-breakdown {
+  color: #c2cadd;
+  font-size: 0.85rem;
+}
+
+.result-panel .button {
+  margin-top: 20px;
+}
+
+.result-panel--defeat .button-primary {
+  background: #d88a98;
+  color: #26151a;
+}
+
+.result-panel--defeat .button-primary:hover:not(:disabled) {
+  background: #e9a3ad;
 }
 
 .score-panel {
@@ -255,6 +363,38 @@ input:focus-visible {
   background: #173a39;
 }
 
+.confirm-dialog {
+  width: min(100% - 32px, 440px);
+  padding: 28px;
+  border: 1px solid #46506b;
+  border-radius: 18px;
+  background: #12182b;
+  color: #f3f5ff;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5);
+}
+
+.confirm-dialog::backdrop {
+  background: rgba(5, 8, 17, 0.76);
+}
+
+.confirm-dialog h2 {
+  margin: 0;
+  font-size: 1.35rem;
+}
+
+.confirm-dialog p {
+  margin: 14px 0 0;
+  color: var(--color-muted);
+  line-height: 1.55;
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 24px;
+}
+
 @media (max-width: 420px) {
   body {
     padding: 16px;
@@ -279,6 +419,14 @@ input:focus-visible {
   .game-footer .button {
     width: 100%;
   }
+
+  .dialog-actions {
+    flex-direction: column-reverse;
+  }
+
+  .dialog-actions .button {
+    width: 100%;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -287,5 +435,46 @@ input:focus-visible {
   *::after {
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
+    animation: none !important;
+  }
+}
+
+@keyframes result-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.99);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes defeat-enter {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  65% {
+    opacity: 1;
+    transform: translateX(2px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes result-icon-enter {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
 }

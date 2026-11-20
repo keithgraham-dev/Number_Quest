@@ -26,7 +26,7 @@
       <p id="difficulty-help" class="field-help">Changing difficulty starts a new round.</p>
     </div>
 
-    <div class="game-status" aria-live="polite">
+    <div class="game-status">
       <p id="current-difficulty">Difficulty: Easy</p>
       <p id="attempts">Attempts: 0 / 10</p>
       <p id="remaining-attempts">Remaining attempts: 10</p>
@@ -51,19 +51,35 @@
       </div>
     </form>
 
-    <p id="feedback" class="feedback" role="status" aria-live="polite">
+    <p id="feedback" class="feedback feedback--neutral" role="status" aria-live="polite" aria-atomic="true">
       Make your first guess to begin.
     </p>
 
+    <section id="result-panel" class="result-panel" aria-labelledby="result-heading" hidden>
+      <span id="result-icon" class="result-icon" aria-hidden="true"></span>
+      <h2
+        id="result-heading"
+        class="result-heading"
+        tabindex="-1"
+        aria-describedby="result-secret result-attempts result-round-score result-score-breakdown"
+      ></h2>
+      <p id="result-message"></p>
+      <p id="result-secret" class="result-detail"></p>
+      <p id="result-attempts" class="result-detail"></p>
+      <p id="result-round-score" class="result-round-score"></p>
+      <p id="result-score-breakdown" class="result-score-breakdown"></p>
+      <button id="result-restart-button" class="button button-primary" type="button"></button>
+    </section>
+
     <section class="score-panel" aria-labelledby="score-heading">
       <h2 id="score-heading">Score</h2>
-      <p id="latest-round-score" aria-live="polite" aria-atomic="true">
+      <p id="latest-round-score">
         Latest round score: Not completed
       </p>
-      <p id="score-breakdown" class="score-breakdown" aria-live="polite" aria-atomic="true">
+      <p id="score-breakdown" class="score-breakdown">
         Complete a round to see the base points and efficiency bonus.
       </p>
-      <p id="session-score" class="session-score" aria-live="polite" aria-atomic="true">
+      <p id="session-score" class="session-score">
         Session score: 0 points
       </p>
     </section>
@@ -76,6 +92,21 @@
         New Session
       </button>
     </div>
+
+    <dialog id="new-session-dialog" class="confirm-dialog" aria-labelledby="dialog-heading" aria-describedby="dialog-description">
+      <h2 id="dialog-heading">Start a new session?</h2>
+      <p id="dialog-description">
+        Your current session score will be lost and reset to zero. Do you want to continue?
+      </p>
+      <div class="dialog-actions">
+        <button id="cancel-new-session" class="button button-secondary" type="button" autofocus>
+          Keep current session
+        </button>
+        <button id="confirm-new-session" class="button button-new-session" type="button">
+          Reset session
+        </button>
+      </div>
+    </dialog>
   </main>
 </body>
 </html>
