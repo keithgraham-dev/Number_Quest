@@ -21,6 +21,19 @@ guesses use an attempt; using all available attempts reveals the secret number.
 Only valid guesses count. Changing the difficulty starts a new round, and
 **Restart round** starts a new round at the currently selected difficulty.
 
+## Scoring
+
+Wins earn the difficulty's base score plus 10% of that score for each unused
+attempt. Losses earn zero points. The latest completed round's score and
+breakdown, along with the cumulative session score, appear in the game. Restarting
+or changing difficulty preserves the session score; **New Session** resets it.
+
+| Difficulty | Base score |
+| --- | ---: |
+| Easy | 100 |
+| Medium | 150 |
+| Hard | 250 |
+
 ## Project files
 
 - `index.html` contains the game structure and controls.

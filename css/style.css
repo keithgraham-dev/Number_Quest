@@ -189,10 +189,46 @@ input:focus-visible {
   line-height: 1.4;
 }
 
+.score-panel {
+  margin-bottom: 22px;
+  padding: 18px;
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  background: #0d1325;
+}
+
+.score-panel h2 {
+  margin: 0 0 12px;
+  color: var(--color-accent);
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.score-panel p {
+  margin: 8px 0 0;
+  color: #dce2f7;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.score-panel .score-breakdown {
+  color: var(--color-muted);
+  font-size: 0.82rem;
+}
+
+.score-panel .session-score {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--color-border);
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
 .game-footer {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   gap: 16px;
   padding-top: 20px;
   border-top: 1px solid var(--color-border);
@@ -209,6 +245,16 @@ input:focus-visible {
   background: var(--color-accent-dark);
 }
 
+.button-new-session {
+  border-color: var(--color-accent);
+  background: var(--color-accent-dark);
+  color: var(--color-accent);
+}
+
+.button-new-session:hover:not(:disabled) {
+  background: #173a39;
+}
+
 @media (max-width: 420px) {
   body {
     padding: 16px;
@@ -223,6 +269,14 @@ input:focus-visible {
   }
 
   .button-primary {
+    width: 100%;
+  }
+
+  .game-footer {
+    flex-direction: column-reverse;
+  }
+
+  .game-footer .button {
     width: 100%;
   }
 }

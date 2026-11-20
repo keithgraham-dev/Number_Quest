@@ -7,17 +7,22 @@ const currentDifficultyDisplay = document.querySelector("#current-difficulty");
 const attemptsDisplay = document.querySelector("#attempts");
 const remainingAttemptsDisplay = document.querySelector("#remaining-attempts");
 const restartButton = document.querySelector("#restart-button");
+const newSessionButton = document.querySelector("#new-session-button");
+const latestRoundScoreDisplay = document.querySelector("#latest-round-score");
+const scoreBreakdownDisplay = document.querySelector("#score-breakdown");
+const sessionScoreDisplay = document.querySelector("#session-score");
 
 const difficulties = {
-  easy: { name: "Easy", min: 1, max: 50, maxAttempts: 10 },
-  medium: { name: "Medium", min: 1, max: 100, maxAttempts: 7 },
-  hard: { name: "Hard", min: 1, max: 500, maxAttempts: 8 }
+  easy: { name: "Easy", min: 1, max: 50, maxAttempts: 10, baseScore: 100 },
+  medium: { name: "Medium", min: 1, max: 100, maxAttempts: 7, baseScore: 150 },
+  hard: { name: "Hard", min: 1, max: 500, maxAttempts: 8, baseScore: 250 }
 };
 
 let secretNumber;
 let attempts;
 let roundIsOver;
 let currentDifficulty;
+let sessionScore = 0;
 
 function startNewRound() {
   currentDifficulty = difficulties[difficultySelect.value];
@@ -38,11 +43,22 @@ function startNewRound() {
   feedback.textContent = `Guess a number from ${currentDifficulty.min} to ${currentDifficulty.max}.`;
 }
 
-function endRound(message) {
+function endRound(message, baseScore = 0, efficiencyBonus = 0) {
+  if (roundIsOver) {
+    return;
+  }
+
+  const roundScore = baseScore + efficiencyBonus;
+  sessionScore += roundScore;
+
   feedback.textContent = message;
   roundIsOver = true;
   guessInput.disabled = true;
   guessButton.disabled = true;
+  latestRoundScoreDisplay.textContent = `Latest round score: ${roundScore} points`;
+  scoreBreakdownDisplay.textContent =
+    `Base points: ${baseScore} + Efficiency bonus: ${efficiencyBonus} = ${roundScore} points.`;
+  sessionScoreDisplay.textContent = `Session score: ${sessionScore} points`;
 }
 
 function handleGuess(event) {
@@ -80,7 +96,14 @@ function handleGuess(event) {
   remainingAttemptsDisplay.textContent = `Remaining attempts: ${remainingAttempts}`;
 
   if (guess === secretNumber) {
-    endRound(`You got it! The secret number was ${secretNumber}.`);
+    const efficiencyBonus = Math.round(
+      remainingAttempts * currentDifficulty.baseScore * 0.1
+    );
+    endRound(
+      `You got it! The secret number was ${secretNumber}.`,
+      currentDifficulty.baseScore,
+      efficiencyBonus
+    );
   } else if (remainingAttempts === 0) {
     endRound(`Out of attempts! The secret number was ${secretNumber}.`);
   } else if (guess > secretNumber) {
@@ -100,5 +123,13 @@ restartButton.addEventListener("click", () => {
   guessInput.focus();
 });
 difficultySelect.addEventListener("change", startNewRound);
+newSessionButton.addEventListener("click", () => {
+  sessionScore = 0;
+  latestRoundScoreDisplay.textContent = "Latest round score: Not completed";
+  scoreBreakdownDisplay.textContent = "Complete a round to see the base points and efficiency bonus.";
+  sessionScoreDisplay.textContent = "Session score: 0 points";
+  startNewRound();
+  guessInput.focus();
+});
 
 startNewRound();

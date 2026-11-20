@@ -55,9 +55,25 @@
       Make your first guess to begin.
     </p>
 
+    <section class="score-panel" aria-labelledby="score-heading">
+      <h2 id="score-heading">Score</h2>
+      <p id="latest-round-score" aria-live="polite" aria-atomic="true">
+        Latest round score: Not completed
+      </p>
+      <p id="score-breakdown" class="score-breakdown" aria-live="polite" aria-atomic="true">
+        Complete a round to see the base points and efficiency bonus.
+      </p>
+      <p id="session-score" class="session-score" aria-live="polite" aria-atomic="true">
+        Session score: 0 points
+      </p>
+    </section>
+
     <div class="game-footer">
       <button id="restart-button" class="button button-secondary" type="button">
         Restart round
+      </button>
+      <button id="new-session-button" class="button button-new-session" type="button">
+        New Session
       </button>
     </div>
   </main>
