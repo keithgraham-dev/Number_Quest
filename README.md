@@ -29,7 +29,9 @@ the cumulative session score.
 Wins earn the difficulty's base score plus 10% of that score for each unused
 attempt. Losses earn zero points. The latest completed round's score and
 breakdown, along with the cumulative session score, appear in the game. Restarting
-or changing difficulty preserves the session score; **New Session** resets it.
+or changing difficulty preserves the session score and latest completed round.
+Confirming **New Session** resets the session score and clears the latest-round
+display until the next round ends.
 
 | Difficulty | Base score |
 | --- | ---: |

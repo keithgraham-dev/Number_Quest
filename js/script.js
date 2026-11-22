@@ -167,12 +167,22 @@ difficultySelect.addEventListener("change", () => startNewRound(true));
 newSessionButton.addEventListener("click", () => {
   newSessionDialog.showModal();
 });
+// The embedded browser sends Escape as keydown without firing the native cancel event.
+newSessionDialog.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    event.preventDefault();
+    newSessionDialog.close();
+  }
+});
 cancelNewSessionButton.addEventListener("click", () => {
   newSessionDialog.close();
 });
 confirmNewSessionButton.addEventListener("click", () => {
   newSessionDialog.close();
   sessionScore = 0;
+  latestRoundScoreDisplay.textContent = "Latest round score: Not completed";
+  scoreBreakdownDisplay.textContent =
+    "Complete a round to see the base points and efficiency bonus.";
   sessionScoreDisplay.textContent = "Session score: 0 points";
   startNewRound(true);
 });

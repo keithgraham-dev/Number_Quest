@@ -1,17 +1,27 @@
 :root {
   color-scheme: dark;
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background: #0b1020;
-  color: #f3f5ff;
+  background: #080f1f;
+  color: #f2f7ff;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  --color-muted: #a4acc5;
-  --color-border: #29314b;
-  --color-accent: #65f0cf;
-  --color-accent-dark: #102b2b;
+  --color-background: #080f1f;
+  --color-surface: #101c32;
+  --color-panel: #14243b;
+  --color-input: #0c192c;
+  --color-text: #f2f7ff;
+  --color-muted: #9baec5;
+  --color-border: #263b56;
+  --color-accent: #42e8d8;
+  --color-accent-dark: #12363e;
+  --color-blue: #55a7ff;
+  --color-highlight: #b7f36b;
+  --color-amber: #f5c46e;
+  --color-warning: #eab48e;
+  --color-danger: #dc8f9d;
 }
 
 * {
@@ -24,28 +34,59 @@ body {
   margin: 0;
   display: grid;
   place-items: center;
+  place-items: safe center;
   padding: 24px;
   background:
-    radial-gradient(ellipse at 50% 0%, rgba(87, 107, 210, 0.17), transparent 55%),
-    #0b1020;
+    radial-gradient(ellipse at 14% 8%, rgba(85, 167, 255, 0.15), transparent 38%),
+    radial-gradient(ellipse at 88% 92%, rgba(66, 232, 216, 0.09), transparent 42%),
+    var(--color-background);
 }
 
 .game-card {
-  width: min(100%, 480px);
+  position: relative;
+  width: min(100%, 520px);
   padding: clamp(28px, 7vw, 48px);
   border: 1px solid var(--color-border);
-  border-radius: 24px;
-  background: rgba(18, 24, 43, 0.94);
-  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+  border-radius: 28px;
+  background: linear-gradient(155deg, rgba(20, 36, 59, 0.98), rgba(16, 28, 50, 0.98));
+  box-shadow: 0 32px 90px rgba(0, 0, 0, 0.42), 0 0 48px rgba(66, 232, 216, 0.045);
+}
+
+.game-card::before {
+  position: absolute;
+  top: 0;
+  right: 9%;
+  left: 9%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--color-accent), var(--color-blue), transparent);
+  content: "";
+  opacity: 0.8;
+  pointer-events: none;
 }
 
 .eyebrow {
-  margin: 0 0 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0 0 14px;
+  padding: 7px 11px;
+  border: 1px solid rgba(66, 232, 216, 0.2);
+  border-radius: 999px;
+  background: rgba(66, 232, 216, 0.06);
   color: var(--color-accent);
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 700;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.13em;
   text-transform: uppercase;
+}
+
+.eyebrow::before {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-highlight);
+  box-shadow: 0 0 10px rgba(183, 243, 107, 0.55);
+  content: "";
 }
 
 h1 {
@@ -53,12 +94,15 @@ h1 {
   font-size: clamp(2.4rem, 9vw, 3.5rem);
   letter-spacing: -0.06em;
   line-height: 1.05;
+  background: linear-gradient(100deg, var(--color-text) 48%, #9cefe6 100%);
+  background-clip: text;
+  color: transparent;
 }
 
 .introduction {
   margin: 16px 0 24px;
   color: var(--color-muted);
-  font-size: 1rem;
+  font-size: 0.98rem;
   line-height: 1.6;
 }
 
@@ -80,15 +124,15 @@ select {
   border: 1px solid var(--color-border);
   border-radius: 12px;
   outline: none;
-  background: #0d1325;
-  color: #f3f5ff;
+  background: var(--color-input);
+  color: var(--color-text);
   font: inherit;
-  transition: border-color 160ms ease, box-shadow 160ms ease;
+  transition: border-color 180ms ease, background-color 180ms ease, box-shadow 180ms ease;
 }
 
 select:focus-visible {
   border-color: var(--color-accent);
-  box-shadow: 0 0 0 3px rgba(101, 240, 207, 0.16);
+  box-shadow: 0 0 0 3px rgba(66, 232, 216, 0.17);
 }
 
 .field-help {
@@ -110,8 +154,8 @@ select:focus-visible {
   padding: 10px 8px;
   border: 1px solid var(--color-border);
   border-radius: 10px;
-  background: #10172a;
-  color: #dce2f7;
+  background: rgba(20, 36, 59, 0.78);
+  color: var(--color-text);
   font-size: 0.78rem;
   line-height: 1.4;
   text-align: center;
@@ -129,30 +173,30 @@ input {
   border: 1px solid var(--color-border);
   border-radius: 12px;
   outline: none;
-  background: #0d1325;
-  color: #f3f5ff;
+  background: var(--color-input);
+  color: var(--color-text);
   font: inherit;
-  transition: border-color 160ms ease, box-shadow 160ms ease;
+  transition: border-color 180ms ease, background-color 180ms ease, box-shadow 180ms ease;
 }
 
 input::placeholder {
-  color: #737d9a;
+  color: #849ab4;
 }
 
 input:focus-visible {
   border-color: var(--color-accent);
-  box-shadow: 0 0 0 3px rgba(101, 240, 207, 0.16);
+  box-shadow: 0 0 0 3px rgba(66, 232, 216, 0.17);
 }
 
 .button {
   min-height: 48px;
   padding: 0 18px;
-  border: 1px solid transparent;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 12px;
   cursor: pointer;
   font: inherit;
   font-weight: 700;
-  transition: background-color 160ms ease, border-color 160ms ease, transform 160ms ease;
+  transition: background-color 180ms ease, border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
 }
 
 .button:hover:not(:disabled) {
@@ -160,7 +204,7 @@ input:focus-visible {
 }
 
 .button:focus-visible {
-  outline: 3px solid rgba(101, 240, 207, 0.6);
+  outline: 3px solid var(--color-accent);
   outline-offset: 3px;
 }
 
@@ -171,11 +215,13 @@ input:focus-visible {
 
 .button-primary {
   background: var(--color-accent);
-  color: #09201e;
+  color: #062522;
+  box-shadow: 0 5px 18px rgba(66, 232, 216, 0.16);
 }
 
 .button-primary:hover:not(:disabled) {
-  background: #8af7df;
+  background: #6cf1e3;
+  box-shadow: 0 7px 22px rgba(66, 232, 216, 0.23);
 }
 
 .feedback {
@@ -184,28 +230,28 @@ input:focus-visible {
   padding: 15px 16px;
   border: 1px solid var(--color-border);
   border-radius: 12px;
-  background: #10172a;
-  color: #dce2f7;
+  background: rgba(16, 28, 50, 0.9);
+  color: var(--color-text);
   line-height: 1.4;
-  transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease;
+  transition: background-color 200ms ease, border-color 200ms ease, color 200ms ease;
 }
 
 .feedback--low {
-  border-color: #347e9a;
-  background: #10232f;
-  color: #9ee8ff;
+  border-color: rgba(85, 167, 255, 0.55);
+  background: rgba(31, 72, 111, 0.3);
+  color: #a8d7ff;
 }
 
 .feedback--high {
-  border-color: #9b7132;
-  background: #2a2115;
-  color: #ffd48a;
+  border-color: rgba(245, 196, 110, 0.55);
+  background: rgba(102, 74, 30, 0.24);
+  color: var(--color-amber);
 }
 
 .feedback--invalid {
-  border-color: #8b6044;
-  background: #261d1a;
-  color: #f0c2a0;
+  border-color: rgba(234, 180, 142, 0.48);
+  background: rgba(96, 59, 39, 0.22);
+  color: var(--color-warning);
 }
 
 .result-panel {
@@ -213,7 +259,7 @@ input:focus-visible {
   padding: 24px;
   border: 1px solid var(--color-border);
   border-radius: 16px;
-  background: #10172a;
+  background: var(--color-surface);
   text-align: center;
   animation: result-enter 320ms ease-out both;
 }
@@ -223,17 +269,17 @@ input:focus-visible {
 }
 
 .result-panel--victory {
-  border-color: #3b9b81;
-  background: linear-gradient(145deg, #102c29, #101b2a 76%);
-  box-shadow: 0 12px 36px rgba(49, 171, 133, 0.12);
-  color: #a4f3d9;
+  border-color: rgba(66, 232, 216, 0.58);
+  background: linear-gradient(145deg, rgba(20, 77, 70, 0.68), var(--color-surface) 78%);
+  box-shadow: 0 12px 36px rgba(66, 232, 216, 0.11);
+  color: #a9f6e2;
 }
 
 .result-panel--defeat {
-  border-color: #925b68;
-  background: linear-gradient(145deg, #2c1b27, #171a2a 76%);
-  box-shadow: 0 12px 36px rgba(177, 82, 102, 0.1);
-  color: #efb4bd;
+  border-color: rgba(220, 143, 157, 0.5);
+  background: linear-gradient(145deg, rgba(93, 46, 60, 0.58), var(--color-surface) 78%);
+  box-shadow: 0 12px 36px rgba(220, 143, 157, 0.09);
+  color: var(--color-danger);
   animation-name: defeat-enter;
 }
 
@@ -256,19 +302,19 @@ input:focus-visible {
   letter-spacing: -0.03em;
 }
 
-.result-heading:focus {
+.result-heading:focus-visible {
   outline: 2px solid currentColor;
   outline-offset: 5px;
 }
 
 .result-panel p {
   margin: 12px 0 0;
-  color: #e2e7f5;
+  color: var(--color-text);
   line-height: 1.5;
 }
 
 .result-panel .result-detail {
-  color: #c2cadd;
+  color: var(--color-muted);
   font-size: 0.9rem;
 }
 
@@ -280,7 +326,7 @@ input:focus-visible {
 }
 
 .result-panel .result-score-breakdown {
-  color: #c2cadd;
+  color: var(--color-muted);
   font-size: 0.85rem;
 }
 
@@ -289,12 +335,12 @@ input:focus-visible {
 }
 
 .result-panel--defeat .button-primary {
-  background: #d88a98;
-  color: #26151a;
+  background: var(--color-danger);
+  color: #30171d;
 }
 
 .result-panel--defeat .button-primary:hover:not(:disabled) {
-  background: #e9a3ad;
+  background: #e9a8b2;
 }
 
 .score-panel {
@@ -302,7 +348,7 @@ input:focus-visible {
   padding: 18px;
   border: 1px solid var(--color-border);
   border-radius: 14px;
-  background: #0d1325;
+  background: rgba(12, 25, 44, 0.8);
 }
 
 .score-panel h2 {
@@ -315,7 +361,7 @@ input:focus-visible {
 
 .score-panel p {
   margin: 8px 0 0;
-  color: #dce2f7;
+  color: var(--color-text);
   font-size: 0.9rem;
   line-height: 1.5;
 }
@@ -329,7 +375,7 @@ input:focus-visible {
   margin-top: 14px;
   padding-top: 12px;
   border-top: 1px solid var(--color-border);
-  color: var(--color-accent);
+  color: var(--color-highlight);
   font-weight: 700;
 }
 
@@ -343,9 +389,9 @@ input:focus-visible {
 }
 
 .button-secondary {
-  border-color: #3b4664;
+  border-color: var(--color-border);
   background: transparent;
-  color: #e6eaff;
+  color: var(--color-text);
 }
 
 .button-secondary:hover:not(:disabled) {
@@ -354,27 +400,28 @@ input:focus-visible {
 }
 
 .button-new-session {
-  border-color: var(--color-accent);
-  background: var(--color-accent-dark);
-  color: var(--color-accent);
+  border-color: rgba(183, 243, 107, 0.5);
+  background: rgba(66, 91, 42, 0.3);
+  color: var(--color-highlight);
 }
 
 .button-new-session:hover:not(:disabled) {
-  background: #173a39;
+  border-color: var(--color-highlight);
+  background: rgba(66, 91, 42, 0.52);
 }
 
 .confirm-dialog {
   width: min(100% - 32px, 440px);
   padding: 28px;
-  border: 1px solid #46506b;
+  border: 1px solid var(--color-border);
   border-radius: 18px;
-  background: #12182b;
-  color: #f3f5ff;
+  background: linear-gradient(150deg, var(--color-panel), var(--color-surface));
+  color: var(--color-text);
   box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5);
 }
 
 .confirm-dialog::backdrop {
-  background: rgba(5, 8, 17, 0.76);
+  background: rgba(5, 10, 20, 0.78);
 }
 
 .confirm-dialog h2 {
